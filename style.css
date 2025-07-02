@@ -112,6 +112,44 @@ h1 {
     padding:  15px;
      color:#8b5cf6;
      background-color:#1e293b ;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
     
 
 }
+ul li p{
+    flex-grow: 1;
+    padding: 2px;
+
+}
+
+/* Delete Button Styling */
+.Dbtn {
+  background: transparent;
+  border: none;
+  color: #ef4444; 
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+
+}
+
+.Dbtn:hover {
+  color: #f85555; 
+}
+
+/* Edit Button Styling */
+.Ebtn {
+  background: transparent;
+  border: none;
+  color: #59a475; 
+  font-size: 20px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.Ebtn:hover {
+  color: #16a34a; 
+}
+

@@ -17,16 +17,20 @@ const addTodo =() =>{
     p.innerHTML = inputText;
     li.appendChild(p);
 
-    // creating remove button
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "Remove";
-    li.appendChild(deleteBtn);
-
-    // creating edit button
+      // creating edit button
 
     const editBtn = document.createElement("button");
-    editBtn.innerText = "Edit";
+    editBtn.innerHTML = '<i class="fas fa-pen"></i>';
+    editBtn.classList.add("Ebtn");
     li.appendChild(editBtn);
+
+    // creating remove button
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.classList.add("Dbtn");
+    li.appendChild(deleteBtn);
+
+  
 
     todoList.appendChild(li);
     // inputBox field empty after text added
@@ -38,4 +42,26 @@ const addTodo =() =>{
 
 }
 
-addBtn.addEventListener("click",addTodo)
+// update todo delete and edit
+
+const updateTodo = (e) => {
+  if (e.target.classList.contains("fa-trash")) {
+    // remove the li element
+    todoList.removeChild(e.target.parentElement.parentElement);
+  }
+
+  else if (e.target.classList.contains("fa-pen")) {
+    const li = e.target.parentElement.parentElement;
+    const p = li.querySelector("p");
+    inputBox.value = p.innerText;
+    todoList.removeChild(li);
+    inputBox.focus();
+    addBtn.value = "fa-pen";
+  }
+
+
+};
+
+
+addBtn.addEventListener("click",addTodo);
+todoList.addEventListener("click",updateTodo)
