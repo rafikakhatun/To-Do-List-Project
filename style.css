@@ -61,7 +61,7 @@ h1 {
 }
 
 
-#input-field {
+#inputBox {
     padding: 12px 25px;
     background-color: #1e293b;
     color: #a78bfa;
@@ -74,12 +74,12 @@ h1 {
 
 }
 
-#input-field::placeholder {
+#inputBox::placeholder {
     color: #a78bfa;
     opacity: 1;
 }
 
-#btn{
+#addBtn{
     margin-left: 5px;
     padding: 12px 10px;
     background-color:#8b5cf6 ;
@@ -90,14 +90,17 @@ h1 {
 
 }
 
-.todo-list{
-    width:100%;
-    max-width: 450px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#addBtn:hover{
+    background-color: #a855f7;
+}
 
+#todoList{
+    width:70%;
+    max-width: 450px;
+    text-align: left;
+    margin-block: 20px;
+
+   
 }
 
  ul li{
@@ -105,9 +108,10 @@ h1 {
     cursor: pointer;
     border: 1px solid #8b5cf6 ;
     border-radius: 8px;
-    margin-block-end: 12px;
-    padding: 6px 12px;
+    margin-block-end: 25px;
+    padding:  15px;
      color:#8b5cf6;
      background-color:#1e293b ;
+    
 
 }
