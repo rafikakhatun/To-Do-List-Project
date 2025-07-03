@@ -1,67 +1,72 @@
+// Getting references to DOM elements
 const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 
-const addTodo =() =>{
-    const inputText = inputBox.value.trim();
-    if(inputText.length <= 0){
-        alert("you must write something in your to do");
-        return false;
-    }
+// Variable to store the task that is being edited
+let editTodo = null;
 
+// Function to add or edit a task
+const addTodo = () => {
+  const inputText = inputBox.value.trim();
 
-
-    // creating li and p tag 
-    const li = document.createElement("li");
-    const p = document.createElement("p");
-    p.innerHTML = inputText;
-    li.appendChild(p);
-
-      // creating edit button
-
-    const editBtn = document.createElement("button");
-    editBtn.innerHTML = '<i class="fas fa-pen"></i>';
-    editBtn.classList.add("Ebtn");
-    li.appendChild(editBtn);
-
-    // creating remove button
-    const deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-    deleteBtn.classList.add("Dbtn");
-    li.appendChild(deleteBtn);
-
-  
-
-    todoList.appendChild(li);
-    // inputBox field empty after text added
-    inputBox.value = "";
-
-
-
-
-
-}
-
-// update todo delete and edit
-
-const updateTodo = (e) => {
-  if (e.target.classList.contains("fa-trash")) {
-    // remove the li element
-    todoList.removeChild(e.target.parentElement.parentElement);
+  // Check if input is empty
+  if (inputText.length <= 0) {
+    alert("You must write something in your to-do");
+    return;
   }
 
-  else if (e.target.classList.contains("fa-pen")) {
-    const li = e.target.parentElement.parentElement;
-    const p = li.querySelector("p");
-    inputBox.value = p.innerText;
-    todoList.removeChild(li);
-    inputBox.focus();
-    addBtn.value = "fa-pen";
+  // If we are in edit mode, update the existing task
+  if (editTodo !== null) {
+    editTodo.querySelector("p").innerText = inputText;
+    editTodo = null;
+    addBtn.value = "Add"; // Change button text back to "Add"
+    inputBox.value = "";  // Clear input field
+    return;
   }
 
+  // Create new list item (li) and task paragraph (p)
+  const li = document.createElement("li");
+  const p = document.createElement("p");
+  p.innerHTML = inputText;
+  li.appendChild(p);
 
+  // Create Edit button with Font Awesome icon
+  const editBtn = document.createElement("button");
+  editBtn.innerHTML = '<i class="fas fa-pen"></i>';
+  editBtn.classList.add("Ebtn");
+  li.appendChild(editBtn);
+
+  // Create Delete button with Font Awesome icon
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+  deleteBtn.classList.add("Dbtn");
+  li.appendChild(deleteBtn);
+
+  // Add the new task to the list
+  todoList.appendChild(li);
+  inputBox.value = ""; // Clear input field after adding
 };
 
+// Function to handle delete and edit actions
+const updateTodo = (e) => {
+  // If delete icon is clicked
+  if (e.target.classList.contains("fa-trash")) {
+    const li = e.target.closest("li"); // Find the closest <li>
+    todoList.removeChild(li); // Remove the task
+  }
 
-addBtn.addEventListener("click",addTodo);
-todoList.addEventListener("click",updateTodo)
+  // If edit icon is clicked
+  else if (e.target.classList.contains("fa-pen")) {
+    const li = e.target.closest("li");     // Find the task item
+    const p = li.querySelector("p");       // Get the paragraph text
+    inputBox.value = p.innerText;          // Set text in input box
+    inputBox.focus();                      // Focus on input
+    addBtn.value = "Edit";                 // Change button text to "Edit"
+    editTodo = li;                         // Store reference to task being edited
+  }
+};
+
+// Event listeners for add and update actions
+addBtn.addEventListener("click", addTodo);
+todoList.addEventListener("click", updateTodo);
