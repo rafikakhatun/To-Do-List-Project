@@ -55,7 +55,14 @@ const updateTodo = (e) => {
   // If delete icon is clicked
   if (e.target.classList.contains("fa-trash")) {
     const li = e.target.closest("li"); // Find the closest <li>
+    const p = li.querySelector("p");
+    const todoText = p.innerText;
+
     todoList.removeChild(li); // Remove the task
+
+    // Remove from localStorage
+    deleteLocalTodos(todoText);
+
   }
 
   // If edit icon is clicked
@@ -77,7 +84,7 @@ const updateTodo = (e) => {
 
 };
 
-// save local todos
+// function to save local todos
 const saveLocalTodos = (todo) => {
   let todos;
   if (localStorage.getItem("todos") === null) {
@@ -94,7 +101,7 @@ const saveLocalTodos = (todo) => {
 }
 
 
-// get local todos
+// function to get local todos
 const getLocalTodos = () => {
 
   let todos;
@@ -134,7 +141,26 @@ const getLocalTodos = () => {
 
 }
 
-document.addEventListener("DOMContentLoaded",getLocalTodos);
+// function to delete local Todos
+const deleteLocalTodos = (todoText) => {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+
+  // Remove the clicked todo from the array
+  todos = todos.filter(todo => todo !== todoText);
+
+  // Save the updated array back to localStorage
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
+
+
+
+
+document.addEventListener("DOMContentLoaded", getLocalTodos);
 
 // Event listeners for add and update actions
 addBtn.addEventListener("click", addTodo);
