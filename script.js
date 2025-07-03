@@ -80,26 +80,61 @@ const updateTodo = (e) => {
 // save local todos
 const saveLocalTodos = (todo) => {
   let todos;
-  if(localStorage.getItem("todos") === null){
+  if (localStorage.getItem("todos") === null) {
     todos = [];
   }
 
-  else{
+  else {
     todos = JSON.parse(localStorage.getItem("todos"));
 
   }
-  
+
   todos.push(todo);
   localStorage.setItem("todos", JSON.stringify(todos));
-
-
-  
 }
+
 
 // get local todos
-const getLocaltodos = () => {
+const getLocalTodos = () => {
+
+  let todos;
+  if (localStorage.getItem("todos") === null) {
+    todos = [];
+  }
+
+  else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+    todos.forEach(todo => {
+
+      // Create new list item (li) and task paragraph (p)
+      const li = document.createElement("li");
+      const p = document.createElement("p");
+      p.innerHTML = todo;
+      li.appendChild(p);
+
+      // Create Edit button with Font Awesome icon
+      const editBtn = document.createElement("button");
+      editBtn.innerHTML = '<i class="fas fa-pen"></i>';
+      editBtn.classList.add("Ebtn");
+      li.appendChild(editBtn);
+
+      // Create Delete button with Font Awesome icon
+      const deleteBtn = document.createElement("button");
+      deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+      deleteBtn.classList.add("Dbtn");
+      li.appendChild(deleteBtn);
+
+      // Add the new task to the list
+      todoList.appendChild(li);
+
+
+    });
+
+  }
 
 }
+
+document.addEventListener("DOMContentLoaded",getLocalTodos);
 
 // Event listeners for add and update actions
 addBtn.addEventListener("click", addTodo);
