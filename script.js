@@ -3,8 +3,53 @@ const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 
+
 // Variable to store the task that is being edited
 let editTodo = null;
+
+// 🎉 Confetti animation function
+const count = 200,
+  defaults = {
+    origin: { y: 0.7 },
+  };
+
+function fire(particleRatio, opts) {
+  confetti(
+    Object.assign({}, defaults, opts, {
+      particleCount: Math.floor(count * particleRatio),
+    })
+  );
+}
+
+function triggerConfetti() {
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
+
+  fire(0.2, {
+    spread: 60,
+  });
+
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
+
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+  });
+
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+  });
+}
+
 
 // Function to add or edit a task
 const addTodo = () => {
@@ -48,6 +93,10 @@ const addTodo = () => {
   inputBox.value = ""; // Clear input field after adding
 
   saveLocalTodos(inputText);
+
+  // 🎉 Confetti animation call
+  triggerConfetti();
+
 };
 
 // Function to handle delete and edit actions
@@ -75,12 +124,6 @@ const updateTodo = (e) => {
     editTodo = li;
 
   }
-
-  // local stroage 
-
-
-
-
 
 };
 
