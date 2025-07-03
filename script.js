@@ -46,6 +46,8 @@ const addTodo = () => {
   // Add the new task to the list
   todoList.appendChild(li);
   inputBox.value = ""; // Clear input field after adding
+
+  saveLocalTodos(inputText);
 };
 
 // Function to handle delete and edit actions
@@ -58,14 +60,46 @@ const updateTodo = (e) => {
 
   // If edit icon is clicked
   else if (e.target.classList.contains("fa-pen")) {
-    const li = e.target.closest("li");     // Find the task item
-    const p = li.querySelector("p");       // Get the paragraph text
-    inputBox.value = p.innerText;          // Set text in input box
-    inputBox.focus();                      // Focus on input
-    addBtn.value = "Edit";                 // Change button text to "Edit"
-    editTodo = li;                         // Store reference to task being edited
+    const li = e.target.closest("li");
+    const p = li.querySelector("p");
+    inputBox.value = p.innerText;
+    inputBox.focus();
+    addBtn.value = "Edit";
+    editTodo = li;
+
   }
+
+  // local stroage 
+
+
+
+
+
 };
+
+// save local todos
+const saveLocalTodos = (todo) => {
+  let todos;
+  if(localStorage.getItem("todos") === null){
+    todos = [];
+  }
+
+  else{
+    todos = JSON.parse(localStorage.getItem("todos"));
+
+  }
+  
+  todos.push(todo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+
+
+  
+}
+
+// get local todos
+const getLocaltodos = () => {
+
+}
 
 // Event listeners for add and update actions
 addBtn.addEventListener("click", addTodo);

@@ -100,7 +100,7 @@ ul li {
     border-radius: 8px;
     margin-block-end: 25px;
     padding: 15px;
-    color: #8b5cf6;
+    color: #a78bfa;
     background-color: #1e293b;
     display: flex;
     align-items: center;
@@ -127,16 +127,16 @@ ul li p {
 }
 
 .Dbtn {
-    color: #ef4444;
+    color: #d70404;
     margin-left: 10px;
 }
 
 .Dbtn:hover {
-    color: #f85555;
+    color: #bc4545;
 }
 
 .Ebtn {
-    color: #59a475;
+    color: #09c44e;
     margin-right: 5px;
 }
 
